@@ -1,6 +1,7 @@
 wp/
 node_modules/
 dist/
-app/vendor
-app/tasks.TODO
-app/.DS_Store
+vendor
+tasks.TODO
+.DS_Store
+.DS_Store
