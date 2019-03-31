@@ -1,5 +1,77 @@
- ☐ significado das siglas
- ☐ UI do admin
- ☐ link pro perfil do jogador
+ ✔ significado das siglas @done (19-03-30 20:08)
+ ✔ UI do admin @done (19-03-30 20:08)
+ ✔ link pro perfil do jogador @done (19-03-30 20:24)
  ☐ copyright da nhl no shortcode
- ☐ check status para goleiro
+ ✔ global search na string @done (19-03-30 20:32)
+ ✔ check status para goleiro @done (19-03-30 20:08)
+ ☐ settings de =unidades de medida (imperial, metrico)
+ ✔ margin bottom depois da legenda @done (19-03-30 23:53)
+ ☐ colocar tag de "ROOKIE", "CAPITAO", "ALTERNATE"
+ ✔ ta faltando uns times (vegas, flyers certeza, rangers, isles, coyotes, avs, habs, sens, jets, panthers, sabres, blues) @done (19-03-31 00:02)
+ ✔ colocar loader no admin @done (19-03-31 01:44)
+
+
+ array(31) {
+  [0]=>
+  string(9) "Canadiens"
+  [1]=>
+  string(11) "Maple Leafs"
+  [2]=>
+  string(6) "Bruins"
+  [3]=>
+  string(7) "Rangers"
+  [4]=>
+  string(10) "Blackhawks"
+  [5]=>
+  string(9) "Red Wings"
+  [6]=>
+  string(5) "Kings"
+  [7]=>
+  string(5) "Stars"
+  [8]=>
+  string(6) "Flyers"
+  [9]=>
+  string(8) "Penguins"
+  [10]=>
+  string(5) "Blues"
+  [11]=>
+  string(6) "Sabres"
+  [12]=>
+  string(7) "Canucks"
+  [13]=>
+  string(6) "Flames"
+  [14]=>
+  string(9) "Islanders"
+  [15]=>
+  string(6) "Devils"
+  [16]=>
+  string(8) "Capitals"
+  [17]=>
+  string(6) "Oilers"
+  [18]=>
+  string(10) "Hurricanes"
+  [19]=>
+  string(9) "Avalanche"
+  [20]=>
+  string(7) "Coyotes"
+  [21]=>
+  string(6) "Sharks"
+  [22]=>
+  string(8) "Senators"
+  [23]=>
+  string(9) "Lightning"
+  [24]=>
+  string(5) "Ducks"
+  [25]=>
+  string(8) "Panthers"
+  [26]=>
+  string(9) "Predators"
+  [27]=>
+  string(4) "Jets"
+  [28]=>
+  string(12) "Blue Jackets"
+  [29]=>
+  string(4) "Wild"
+  [30]=>
+  string(14) "Golden Knights"
+}

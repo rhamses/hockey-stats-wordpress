@@ -1,0 +1,153 @@
+/*
+	Overall Table Styles
+ */
+
+.player--wrapper {
+  padding-top: 1em;
+  margin-top: 1em;
+
+  border-top: solid 1px #ccc;
+}
+
+.player--wrapper .player__title--complementary span {
+	display: inline-block;
+	padding-left: .5em;
+	padding-right: .5em;
+	position: relative;
+}
+
+.player--wrapper .player__title--complementary span::after {
+	content: '';
+	display: block;
+	height: 70%;
+	position: absolute;
+	left: 100%;
+	top: 15%;
+	width: 1px;
+
+	background-color: #000;
+}
+
+.player--wrapper .player__title--complementary span:first-child {
+	padding-left: 0;
+}
+
+.player--wrapper .player__title--complementary span:last-child::after {
+	content: none;
+}
+
+.player--wrapper .player__image {
+	margin: 0;
+	padding: 0;
+}
+
+.player--wrapper .player__image img {
+	display: block;
+}
+
+/*
+	Player Table Responsive
+ */
+
+.player--wrapper .player__stats--table--wrapper {
+	overflow: scroll;
+	position: relative;
+	width: 100%;
+
+	outline: #efefef;
+}
+
+@media screen and (max-width: 1024px) {
+	.player--wrapper .player__title--complementary span {
+		display: block;
+		padding-left: 0;
+	}
+
+	.player--wrapper .player__title--complementary span::after {
+		content: none;
+	}
+}
+
+/*
+	Player Table
+ */
+
+.player--wrapper .player__stats--table {
+	min-width: 900px;
+	margin-bottom: 0;
+}
+
+.player--wrapper .player__stats--table th,
+.player--wrapper .player__stats--table td {
+	border: 1px solid #e6e6e6;	
+	text-align: center;
+	vertical-align: middle;
+}
+
+.player--wrapper .player__stats--table th {
+	font-weight: bold;
+	background-color: #f9f9f9;
+}
+
+.player--wrapper .player__stats--table th.cell--image {
+	padding: 0;
+	margin: 0;
+	width: 168px;
+
+	background-color: #fff;
+}
+
+/*
+	Legend Box
+ */
+
+.player__stats--legend__list {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 1em;
+}
+
+.player__stats--legend--wrapper {
+	font-size: 16px;
+}
+
+.player__stats--legend--wrapper .showLegend {
+	padding: .5em;
+
+	font-variant: small-caps;
+	text-transform: lowercase;
+}
+
+.player__stats--legend__list {
+	margin: 0;
+	padding: 1em;
+	width: 100%;
+
+	background-color: #f9f9f9;
+	border: solid 1px #efefef;
+}
+
+.player__stats--legend__list dt, 
+.player__stats--legend__list dd {
+	margin: 0;
+	line-height: 2.5;
+}
+
+.player__stats--legend__list dt {
+	flex-basis: 10%;
+}
+
+.player__stats--legend__list dd {
+	flex-basis: 40%;
+}
+
+@media screen and (max-width: 1024px) {
+	.player__stats--legend__list dt {
+		flex-basis: 30%;
+	}
+
+	.player__stats--legend__list dd {
+		flex-basis: 70%;
+	}
+}
+

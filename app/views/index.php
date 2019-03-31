@@ -2,21 +2,29 @@
 	<h1>NHL Stats</h1>
 	<p>Choose the tab below to get stats from <a href="https://nhl.com/stats">NHL.com</a> direct in form of a shortcode to be used wherever you want</p>
 	<h2 class="nav-tab-wrapper">
-	    <a href="#byplayer" class="nav-tab nav-tab-active">Statys By Player</a>
-	    <a href="#byteam" class="nav-tab">By Team</a>
+		<a href="#byplayer" class="nav-tab nav-tab-active">Statys By Player</a>
 	</h2>
-
-	<section id="byplayer">
-		<fieldset>
-			<legend class="screen-reader-text"><span>Fieldset Example</span></legend>
-			<label for="users_can_register">
-				<input name="" type="text" id="searchPlayer" value="" placeholder="Search for a player" />
-				<span><?php esc_attr_e( 'Search for a player name', 'nhlstats' ); ?></span>
-			</label>
-		</fieldset>
-		<div id="searchResults"></div>
-		<div class="player__stats--wrapper"></div>
-	</section>
+	<div id="poststuff">
+		<div id="post-body" class="metabox-holder columns-2">
+			<section id="byplayer">
+				<div class="meta-box-sortables ui-sortable searchbox--wrapper">
+					<div class="postbox">
+						<h2><span>Search for a player name to get his stats</span></h2>
+						<div class="inside">
+							<fieldset>
+								<legend class="screen-reader-text"><span>Search For a Player</span></legend>
+								<label for="search_for_player">
+									<input name="search_for_player" type="search" id="searchPlayer" value="" placeholder="Search for a player name" />
+								</label>
+							</fieldset>
+							<div id="searchResults" class="search--results"></div>
+						</div>
+					</div>
+				</div>
+				<div class="player__stats--wrapper"></div>
+			</section>
+		</div>
+	</div>
 
 	<!-- <section id="byteam">
 		search for players
