@@ -11,6 +11,7 @@ class NhlStats_Admin extends NhlStats_API
 
 		add_action('wp_ajax_by_player', array('NhlStats_Admin', 'searchByPlayer') );
 		add_action('wp_ajax_player_stats', array('NhlStats_Admin', 'playerStats') );
+		add_action('wp_ajax_get_players', array('NhlStats_Admin', 'getPlayers') );
 	}
 
 	public static function adminPages()
@@ -32,8 +33,9 @@ class NhlStats_Admin extends NhlStats_API
 			'hockey-stats-settings',
 			function()
 			{
-				if ($_POST['metricSystem']) {
-					update_option('nhlstats_metricsystem', $_POST['metricSystem']);
+				if (isset($_POST['metricSystem'])) {
+					$mS = sanitize_option( 'nhlstats_metricsystem', $_POST['metricSystem'] );
+					update_option('nhlstats_metricsystem', $mS);
 				}
 				require(AMB1_PLUGIN_PATH . 'views/settings.php');
 			}
@@ -42,17 +44,21 @@ class NhlStats_Admin extends NhlStats_API
 
 	public static function loadAdminScripts()
 	{
-		wp_register_script( 'nhlstats_functions.js', plugin_dir_url( __FILE__ ) . '../static/js/functions.js', array('jquery'), PLUGIN_VERSION, true);
-		wp_register_script( 'ss_ajax.js', plugin_dir_url( __FILE__ ) . '../static/js/ajax.js', array('jquery'), PLUGIN_VERSION, true);
-		wp_enqueue_script( 'nhlstats_functions.js');
+		wp_register_script( 'nhlstats_functions.js', plugin_dir_url( __FILE__ ) . '../static/js/functions.js', array('jquery'), PLUGIN_VERSION, false);
+		wp_register_script( 'nhlstats_dom', plugin_dir_url( __FILE__ ) . '../static/js/dom.js', array('jquery'), PLUGIN_VERSION, false);
 		
-		wp_enqueue_script( 'ss_ajax.js');
+		wp_enqueue_script( 'nhlstats_functions.js');
+		wp_enqueue_script( 'nhlstats_dom');
+
 		wp_enqueue_style( 'nhlstats-css', plugin_dir_url( __FILE__ ) . '../static/css/main.css', null, PLUGIN_VERSION);
 	}
 
 	public static function loadViewHome()
 	{
-		self::getPlayers();
-		require(AMB1_PLUGIN_PATH . 'views/index.php');
+		if (get_transient( 'nhlstats_players' )) {
+			require(AMB1_PLUGIN_PATH . 'views/index.php');
+		} else {
+			require(AMB1_PLUGIN_PATH . 'views/loader.php');
+		}
 	}
 }

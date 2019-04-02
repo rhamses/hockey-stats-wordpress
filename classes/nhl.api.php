@@ -93,6 +93,12 @@ class NhlStats_API
 				}
 			}
 			set_transient('nhlstats_players', $players, 60 * 60 * 24 );
+			$response = array(
+				"url" => get_admin_url() . '/admin.php?page=hockey-stats',
+				"status" => true
+			);
+			echo json_encode($response);
+			die();
 		}	
 	}
 

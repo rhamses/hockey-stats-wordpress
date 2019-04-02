@@ -13,7 +13,7 @@ ini_set('memory_limit', '512M');
 
 require 'vendor/autoload.php';
 
-define( 'PLUGIN_VERSION', '1.0.8');
+define( 'PLUGIN_VERSION', '1.0.9');
 define( 'AMB1_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 require_once(AMB1_PLUGIN_PATH . 'classes/trait.plugin.php');
