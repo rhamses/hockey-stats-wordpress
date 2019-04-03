@@ -93,7 +93,15 @@ class NhlStats_API
 				}
 			}
 			set_transient('nhlstats_players', $players, 60 * 60 * 24 );
-		}	
+		};
+
+		$response = array(
+			'status' => true,
+			'league' => 'nhl',
+			'players' => get_transient( 'nhlstats_players' )
+		);
+
+		return $response;
 	}
 
 	static public function getPlayerStats($id) 

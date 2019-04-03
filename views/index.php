@@ -13,6 +13,16 @@
 						<div class="inside">
 							<fieldset>
 								<legend class="screen-reader-text"><span>Search For a Player</span></legend>
+								<div class="radiobutton">
+								<label for="nhl">
+									<input type="radio" id="nhl" name="league" value="nhl" checked>
+									NHL
+								</label>
+								<label for="cwhl">
+									<input type="radio" id="cwhl" name="league" value="cwhl">
+									CWHL
+								</label>
+								</div>
 								<label for="search_for_player">
 									<input name="search_for_player" type="search" id="searchPlayer" value="" placeholder="Search for a player name" />
 								</label>
@@ -25,8 +35,4 @@
 			</section>
 		</div>
 	</div>
-
-	<!-- <section id="byteam">
-		search for players
-	</section> -->
 </div>

@@ -13,10 +13,11 @@ ini_set('memory_limit', '512M');
 
 require 'vendor/autoload.php';
 
-define( 'PLUGIN_VERSION', '1.0.8');
+define( 'PLUGIN_VERSION', '2.0.6');
 define( 'AMB1_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 require_once(AMB1_PLUGIN_PATH . 'classes/trait.plugin.php');
+require_once(AMB1_PLUGIN_PATH . 'classes/cwhl.api.php');
 require_once(AMB1_PLUGIN_PATH . 'classes/nhl.api.php');
 require_once(AMB1_PLUGIN_PATH . 'classes/settings.plugin.php');
 

@@ -2,27 +2,24 @@
 /**
  * Main Plugin File
  */
-class NhlStats extends NhlStats_API
+class NhlStats
 {
 	use nhlShortcode;
+	use PlayerByLeague;
 
 	static function init()
 	{
 		add_shortcode('nhl-stats', array('NhlStats', 'renderShortcode'));
 		add_action('wp_enqueue_scripts', array('NhlStats', 'loadFrontendScripts') );
 	}
-
-	function plugin_activation()
-	{
-		self::getPlayers();
-	}
-
+	
 	static function renderShortcode($atts)
 	{
-		if (array_key_exists('player', $atts)) {
+		if (array_key_exists('player', $atts) && array_key_exists('league', $atts)) {
 			$playerID = $atts['player'];
-			$player = self::getPlayerStats($playerID);
-
+			$league = $atts['league'];
+			$player = PlayerByLeague::getPlayerStats($playerID, $league);
+			// $player = self::getPlayerStats($playerID, $league);
 			return nhlShortcode::renderPlayeTable($player);
 		}
 	}

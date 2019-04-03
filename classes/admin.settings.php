@@ -6,11 +6,11 @@ class NhlStats_Admin extends NhlStats_API
 	public static function init()
 	{
 		add_action('admin_menu', array('NhlStats_Admin', 'adminPages') );
-
 		add_action('admin_enqueue_scripts', array('NhlStats_Admin', 'loadAdminScripts') );
 
-		add_action('wp_ajax_by_player', array('NhlStats_Admin', 'searchByPlayer') );
-		add_action('wp_ajax_player_stats', array('NhlStats_Admin', 'playerStats') );
+		// add_action('wp_ajax_by_player', array('NhlStats_Admin', 'searchByPlayer') );
+		add_action('wp_ajax_player_stats', self::getPlayerByLeague('stats') );
+		add_action('wp_ajax_get_players', self::getPlayerByLeague() );
 	}
 
 	public static function adminPages()
@@ -32,8 +32,9 @@ class NhlStats_Admin extends NhlStats_API
 			'hockey-stats-settings',
 			function()
 			{
-				if ($_POST['metricSystem']) {
-					update_option('nhlstats_metricsystem', $_POST['metricSystem']);
+				if (isset($_POST['metricSystem'])) {
+					$mS = sanitize_option( 'nhlstats_metricsystem', $_POST['metricSystem'] );
+					update_option('nhlstats_metricsystem', $mS);
 				}
 				require(AMB1_PLUGIN_PATH . 'views/settings.php');
 			}
@@ -42,17 +43,59 @@ class NhlStats_Admin extends NhlStats_API
 
 	public static function loadAdminScripts()
 	{
-		wp_register_script( 'nhlstats_functions.js', plugin_dir_url( __FILE__ ) . '../static/js/functions.js', array('jquery'), PLUGIN_VERSION, true);
-		wp_register_script( 'ss_ajax.js', plugin_dir_url( __FILE__ ) . '../static/js/ajax.js', array('jquery'), PLUGIN_VERSION, true);
-		wp_enqueue_script( 'nhlstats_functions.js');
+		wp_register_script( 'nhlstats_functions.js', plugin_dir_url( __FILE__ ) . '../static/js/functions.js', array('jquery'), current_time('timestamp'), false);
+		wp_register_script( 'nhlstats_dom', plugin_dir_url( __FILE__ ) . '../static/js/dom.js', array('jquery'), current_time('timestamp'), false);
 		
-		wp_enqueue_script( 'ss_ajax.js');
+		wp_enqueue_script( 'nhlstats_functions.js');
+		wp_enqueue_script( 'nhlstats_dom');
+
 		wp_enqueue_style( 'nhlstats-css', plugin_dir_url( __FILE__ ) . '../static/css/main.css', null, PLUGIN_VERSION);
 	}
 
 	public static function loadViewHome()
 	{
-		self::getPlayers();
-		require(AMB1_PLUGIN_PATH . 'views/index.php');
+		if (get_transient( 'nhlstats_players' )) {
+			require(AMB1_PLUGIN_PATH . 'views/index.php');
+		} else {
+			require(AMB1_PLUGIN_PATH . 'views/loader.php');
+		}
+	}
+
+	public static function getPlayerByLeague($action = null)
+	{
+		if (isset($_POST['league'])) {
+			$league = esc_attr( $_POST['league'] );
+
+			if ($action == "stats") {
+				switch ($league) {
+					case 'nhl':
+						$id = esc_html($_POST['id']);
+						NhlStats_API::playerStats($id, $league);
+					break;
+					case 'cwhl':
+						$id = esc_html($_POST['id']);
+						CwhlStats_API::playerStats($id, $league);
+					break;
+					default:
+						$response = array(
+							"status" => false,
+							"message" => "Houve um erro com a liga selecionada"
+						);
+					break;
+				}
+			}
+		} 
+
+		if (isset($_POST['loader'])) {
+			$nhl = NhlStats_API::getPlayers();
+			$cwhl = CwhlStats_API::getPlayers();
+			$response = array(
+				"url" => get_admin_url() . '/admin.php?page=hockey-stats',
+				"status" => true,
+				"leagues" => array($nhl, $cwhl)
+			);
+			echo json_encode($response);
+			die();
+		}
 	}
 }
